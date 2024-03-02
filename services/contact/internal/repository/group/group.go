@@ -18,7 +18,16 @@ func NewGroupRepository(db *sql.DB) repository.InterfaceGroupRepository {
 }
 
 func (r *GroupRepository) Insert(group group.Group) (int, error) {
-	return 0, nil
+	query := `INSERT INTO groups (name) VALUES ($1)`
+	res, err := r.db.Exec(query, group.Name)
+	if err != nil {
+		return 0, nil
+	}
+	id, err := res.LastInsertId()
+	if err != nil {
+		return 0, nil
+	}
+	return int(id), nil
 }
 
 func (r *GroupRepository) GetByID(id int) (group.Group, error) {

@@ -5,5 +5,5 @@ type Contact struct {
 	Name       string
 	Surname    string
 	Phone 	   string
-	GroupID    int
+	Patronymic string
 }
